@@ -182,6 +182,10 @@
             margin-top: 20px;
             font-size: 14px;
         }
+        /* Скрытие водяного знака */
+        .smartsupp-copyright {
+            display: none !important; /* Использование !important */
+        }
     </style>
 </head>
 <body>
@@ -309,6 +313,20 @@
 
     </script>
 
+    <!-- Скрипты Smartsupp -->
+    <script type="text/javascript">
+        var _smartsupp = _smartsupp || {};
+        _smartsupp.key = '46ccc67795ccc64477d6ab74073349a426870abd'; // Замените на ваш ключ Smartsupp
+        window.smartsupp || (function (d) {
+            var s, c, o = smartsupp = function () { o._.push(arguments) };
+            o._ = [];
+            s = d.createElement('script');
+            s.type = 'text/javascript';
+            s.async = true;
+            s.src = '//www.smartsuppchat.com/loader.js';
+            var h = d.getElementsByTagName('head')[0];
+            h.appendChild(s);
+        })(document);
     </script>
 </body>
 </html>
