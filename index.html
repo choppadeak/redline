@@ -5,15 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мой сайт с Smartsupp</title>
     <style>
-        /* CSS для скрытия водяного знака Smartsupp */
-        .smartsupp-watermark {
-            display: none !important;
+        body {
+            position: relative; /* Устанавливаем относительное позиционирование для контейнера */
+        }
+
+        /* Стили для закрытия водяного знака */
+        .watermark-cover {
+            position: absolute; /* Позиционирование для наложения */
+            top: 10px; /* Корректируйте по необходимости */
+            right: 10px; /* Корректируйте по необходимости */
+            width: 150px; /* Ширина фигуры */
+            height: 50px; /* Высота фигуры */
+            background-color: white; /* Цвет фигуры */
+            border-radius: 5px; /* Радиус границы (по желанию) */
+            z-index: 9999; /* Убедитесь, что фигура выше других элементов */
         }
     </style>
 </head>
 <body>
     <h1>Добро пожаловать на мой сайт!</h1>
     <p>Здесь будет описание вашего сайта.</p>
+
+    <div class="watermark-cover"></div> <!-- Фигура для закрытия водяного знака -->
 
     <!-- Smartsupp Live Chat script -->
     <script type="text/javascript">
