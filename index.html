@@ -30,7 +30,7 @@
     <script>
         window.addEventListener('load', function() {
             setTimeout(function() {
-                const watermark = document.querySelector('.smartsupp-copyright');
+                const watermark = document.querySelector('.smartsupp-copyright') || document.querySelector('[class*="copyright"]');
                 if (watermark) {
                     console.log("Водяной знак найден и будет скрыт");
                     watermark.style.display = 'none'; // Скрыть водяной знак
