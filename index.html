@@ -182,6 +182,11 @@
             margin-top: 20px;
             font-size: 14px;
         }
+
+        /* Скрытие водяного знака */
+        #smartsupp-chat .smartsupp-copyright {
+            display: none !important; /* Скрывает водяной знак */
+        }
     </style>
 </head>
 <body>
@@ -242,121 +247,78 @@
             <div class="product">
                 <img src="https://via.placeholder.com/100" alt="Товар 7">
                 <div class="product-title">Товар 7</div>
-                <div class="product-price">300 руб.</div>
+                <div class="product-price">400 руб.</div>
                 <button class="btn" onclick="openChat()">Написать продавцу</button>
             </div>
             <div class="product">
                 <img src="https://via.placeholder.com/100" alt="Товар 8">
                 <div class="product-title">Товар 8</div>
-                <div class="product-price">1800 руб.</div>
+                <div class="product-price">850 руб.</div>
                 <button class="btn" onclick="openChat()">Написать продавцу</button>
             </div>
         </div>
 
-        <!-- Чат с продавцом -->
-        <div class="chat-box" id="chatBox">
-            <div class="chat-header" id="chatHeader">Чат с продавцом</div>
-            <div class="chat-body" id="chatBody"></div>
-            <div class="chat-input">
-                <input type="text" id="chatInput" placeholder="Введите сообщение...">
-                <button onclick="sendMessage()">Отправить</button>
-            </div>
-        </div>
+        <!-- Нижний колонтитул -->
+        <footer class="footer">
+            © 2024 Магазин. Все права защищены.
+        </footer>
+    </div>
 
-        <!-- Текст о конфиденциальности -->
-        <div class="footer">
-            <p>RedLine ценит вашу конфиденциальность, все чаты одноразовые и не сохраняются в базе данных.</p>
+    <!-- Чат -->
+    <div class="chat-box" id="chatBox">
+        <div class="chat-header">Чат с продавцом</div>
+        <div class="chat-body" id="chatBody"></div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Введите ваше сообщение...">
+            <button onclick="sendMessage()">Отправить</button>
         </div>
     </div>
 
     <script>
-        // Авторизация по никнейму
         function login() {
             const nickname = document.getElementById('nickname').value;
             if (nickname) {
-                // Сохранение никнейма
-                sessionStorage.setItem('nickname', nickname);
-
-                // Переход в магазин
                 document.getElementById('loginPage').classList.remove('active');
                 document.getElementById('shopPage').classList.add('active');
-
-                // Отображение никнейма в магазине
-                document.getElementById('usernameDisplay').textContent = 'Ваш никнейм: ' + nickname;
+                document.getElementById('usernameDisplay').innerText = `Привет, ${nickname}`;
             } else {
-                alert('Введите никнейм');
+                alert('Пожалуйста, введите ваш никнейм.');
             }
         }
 
-        // Открытие чата
         function openChat() {
             document.getElementById('chatBox').style.display = 'block';
         }
 
-        // Отправка сообщения в чат
         function sendMessage() {
-            const chatInput = document.getElementById('chatInput');
-            const message = chatInput.value;
-
+            const input = document.getElementById('chatInput');
+            const message = input.value;
             if (message) {
                 const chatBody = document.getElementById('chatBody');
-                const nickname = sessionStorage.getItem('nickname');
-
-                // Добавление сообщения пользователя в чат
-                const userMessage = `<div class="chat-message"><span class="message"><strong>${nickname}:</strong> ${message}</span></div>`;
-                chatBody.innerHTML += userMessage;
-
-                // Автопрокрутка чата вниз
-                chatBody.scrollTop = chatBody.scrollHeight;
-
-                // Очистка поля ввода
-                chatInput.value = '';
-
-                // Симуляция ответа продавца
-                setTimeout(() => {
-                    const sellerMessage = `<div class="chat-message"><span class="message"><strong>Продавец:</strong> Спасибо за ваше сообщение! Чем могу помочь?</span></div>`;
-                    chatBody.innerHTML += sellerMessage;
-
-                    // Автопрокрутка чата вниз
-                    chatBody.scrollTop = chatBody.scrollHeight;
-                }, 2000); // Задержка 2 секунды перед ответом
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('chat-message');
+                messageElement.innerHTML = `<div class="message">${message}</div>`;
+                chatBody.appendChild(messageElement);
+                input.value = '';
+                chatBody.scrollTop = chatBody.scrollHeight; // Прокрутка вниз
             }
         }
-
-        // Добавление функции перемещения чата
-        let isDragging = false;
-        let offsetX, offsetY;
-
-        const chatBox = document.getElementById('chatBox');
-        const chatHeader = document.getElementById('chatHeader');
-
-        chatHeader.addEventListener('mousedown', function(e) {
-            isDragging = true;
-            offsetX = e.clientX - chatBox.offsetLeft;
-            offsetY = e.clientY - chatBox.offsetTop;
-        });
-
-        document.addEventListener('mouseup', function() {
-            isDragging = false;
-        });
-
-        document.addEventListener('mousemove', function(e) {
-            if (isDragging) {
-                chatBox.style.left = (e.clientX - offsetX) + 'px';
-                chatBox.style.top = (e.clientY - offsetY) + 'px';
-            }
-        });
     </script>
-<!-- Smartsupp Live Chat script -->
-<script type="text/javascript">
-var _smartsupp = _smartsupp || {};
-_smartsupp.key = '46ccc67795ccc64477d6ab74073349a426870abd';
-window.smartsupp||(function(d) {
-  var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
-  s=d.getElementsByTagName('script')[0];c=d.createElement('script');
-  c.type='text/javascript';c.charset='utf-8';c.async=true;
-  c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
-})(document);
-</script>
-<noscript> <a href=“https:” target=“_blank”></a></noscript>
+
+    <!-- Скрипты Smartsupp -->
+    <script type="text/javascript">
+        var _smartsupp = _smartsupp || {};
+        _smartsupp.key = '46ccc67795ccc64477d6ab74073349a426870abd'; // Замените на ваш ключ Smartsupp
+        window.smartsupp || (function (d) {
+            var s, c, o = smartsupp = function () { o._.push(arguments) };
+            o._ = [];
+            s = d.createElement('script');
+            s.type = 'text/javascript';
+            s.async = true;
+            s.src = '//www.smartsuppchat.com/loader.js';
+            var h = d.getElementsByTagName('head')[0];
+            h.appendChild(s);
+        })(document);
+    </script>
+</body>
 </html>
