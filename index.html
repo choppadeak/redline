@@ -14,7 +14,7 @@
         }
         /* Другие стили... */
 
-        /* Скрытие водяного знака */
+        /* Стили для скрытия водяного знака */
         .smartsupp-copyright {
             display: none !important;
             visibility: hidden; /* Дополнительное скрытие */
@@ -28,18 +28,6 @@
     <!-- Ваш контент... -->
 
     <script>
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                const watermark = document.querySelector('.smartsupp-copyright') || document.querySelector('[class*="copyright"]');
-                if (watermark) {
-                    console.log("Водяной знак найден и будет скрыт");
-                    watermark.style.display = 'none'; // Скрыть водяной знак
-                } else {
-                    console.log("Водяной знак не найден");
-                }
-            }, 2000); // Задержка 2 секунды перед выполнением
-        });
-
         // Код Smartsupp
         var _smartsupp = _smartsupp || {};
         _smartsupp.key = '46ccc67795ccc64477d6ab74073349a426870abd';
@@ -53,6 +41,22 @@
             var h = d.getElementsByTagName('head')[0];
             h.appendChild(s);
         })(document);
+
+        // Используем MutationObserver для скрытия водяного знака
+        const observer = new MutationObserver(mutations => {
+            mutations.forEach(mutation => {
+                mutation.addedNodes.forEach(node => {
+                    if (node.nodeType === 1 && node.classList.contains('smartsupp-copyright')) {
+                        console.log("Водяной знак найден и будет скрыт");
+                        node.style.display = 'none';
+                        node.style.visibility = 'hidden'; // Скрытие элемента
+                    }
+                });
+            });
+        });
+
+        // Начинаем наблюдение за изменениями в body
+        observer.observe(document.body, { childList: true, subtree: true });
     </script>
 </body>
 </html>
