@@ -182,11 +182,6 @@
             margin-top: 20px;
             font-size: 14px;
         }
-
-        /* Скрытие водяного знака */
-        #smartsupp-chat .smartsupp-copyright {
-            display: none !important; /* Скрывает водяной знак */
-        }
     </style>
 </head>
 <body>
@@ -303,6 +298,15 @@
                 chatBody.scrollTop = chatBody.scrollHeight; // Прокрутка вниз
             }
         }
+
+        // Удаление водяного знака Smartsupp
+        window.addEventListener('load', function() {
+            const watermark = document.querySelector('.smartsupp-copyright');
+            if (watermark) {
+                watermark.style.display = 'none'; // Скрыть водяной знак
+            }
+        });
+
     </script>
 
     <!-- Скрипты Smartsupp -->
