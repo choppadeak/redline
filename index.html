@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Магазин с чатом</title>
     <style>
-        /* Ваши стили... */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        /* Другие стили... */
 
         /* Скрытие водяного знака */
         .smartsupp-copyright {
@@ -22,26 +29,27 @@
 
     <script>
         window.addEventListener('load', function() {
-            console.log("Страница загружена");
-            const watermark = document.querySelector('.smartsupp-copyright');
-            if (watermark) {
-                console.log("Водяной знак найден и будет скрыт");
-                watermark.style.display = 'none'; // Скрыть водяной знак
-            } else {
-                console.log("Водяной знак не найден");
-            }
+            setTimeout(function() {
+                const watermark = document.querySelector('.smartsupp-copyright');
+                if (watermark) {
+                    console.log("Водяной знак найден и будет скрыт");
+                    watermark.style.display = 'none'; // Скрыть водяной знак
+                } else {
+                    console.log("Водяной знак не найден");
+                }
+            }, 2000); // Задержка 2 секунды перед выполнением
         });
 
-        // Код Smartsupp...
+        // Код Smartsupp
         var _smartsupp = _smartsupp || {};
-        _smartsupp.key = '46ccc67795ccc64477d6ab74073349a426870abd'; // Замените на ваш ключ Smartsupp
+        _smartsupp.key = '46ccc67795ccc64477d6ab74073349a426870abd';
         window.smartsupp || (function (d) {
             var s, c, o = smartsupp = function () { o._.push(arguments) };
             o._ = [];
             s = d.createElement('script');
             s.type = 'text/javascript';
             s.async = true;
-            s.src = '//www.smartsuppchat.com/loader.js';
+            s.src = 'https://www.smartsuppchat.com/loader.js';
             var h = d.getElementsByTagName('head')[0];
             h.appendChild(s);
         })(document);
